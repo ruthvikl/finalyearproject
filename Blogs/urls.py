@@ -5,7 +5,7 @@ from django.conf.urls import url
 
 
 from django.urls import path
-from Blogs.views import HomeView,BlogView,AboutView,ContactView,AddBlog,EditBlog,register
+from Blogs.views import HomeView,BlogView,AboutView,ContactView,AddBlog,EditBlog,register,Analytics
 # ,prediction
 
 app_name ="Blogs"
@@ -18,6 +18,7 @@ urlpatterns = [
     path('Contact/',ContactView,name='ContactView'),
     path('AddBlog/',AddBlog,name='AddBlog'),
     path('EditBlog/<slug>',EditBlog,name='EditBlog'),
+    path('Analytics',Analytics,name='Analytics'),
     url(r'^Register/', register,name='Register')
     # url(r'^prediction/$', prediction, name='prediction'),
 ]

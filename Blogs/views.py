@@ -225,3 +225,9 @@ def EditBlog(request,slug):
 
             blog.save()
             return redirect('Blogs:AboutView')
+
+def Analytics(request):
+    blogs = Blog.objects.all()[0:10]
+    return render(request,'Analytics.html',{
+        'blogs':blogs
+    })
