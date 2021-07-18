@@ -8,20 +8,20 @@ class Blog(models.Model):
     Background_Image = models.ImageField()
 
     Subheading1 = models.CharField(max_length=100,blank=True,null=True)
-    Image1 = models.ImageField(blank=True,null=True)
+    # Image1 = models.ImageField(blank=True,null=True)
     Paragraph1 = models.TextField(blank=True,null=True)
 
     Subheading2 = models.CharField(max_length=100, blank=True, null=True)
-    Image2 = models.ImageField(blank=True, null=True)
+    # Image2 = models.ImageField(blank=True, null=True)
     Paragraph2 = models.TextField(blank=True,null=True)
 
     Subheading3 = models.CharField(max_length=100, blank=True, null=True)
-    Image3 = models.ImageField(blank=True, null=True)
+    # Image3 = models.ImageField(blank=True, null=True)
     Paragraph3 = models.TextField(blank=True,null=True)
 
     Date = models.DateField(auto_now_add=True,blank=True,null=True)
 
-    Video = models.FileField(blank=True,null=True,upload_to="Videos")
+    # Video = models.FileField(blank=True,null=True,upload_to="Videos")
 
     slug = models.SlugField(blank=True,null=True,unique=True)
 

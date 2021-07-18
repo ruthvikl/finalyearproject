@@ -100,29 +100,29 @@ def AddBlog(request):
             Name = form.cleaned_data.get('Name')
             Background_Image = form.cleaned_data.get('Background_Image')
             Subheading1 = form.cleaned_data.get('Subheading1')
-            Image1 = form.files.get('Image1')
+            # Image1 = form.files.get('Image1')
             Paragraph1 = form.cleaned_data.get('Paragraph1')
             Subheading2 = form.cleaned_data.get('Subheading2')
-            Image2 = form.files.get('Image2')
+            # Image2 = form.files.get('Image2')
             Paragraph2 = form.cleaned_data.get('Paragraph2')
             Subheading3 = form.cleaned_data.get('Subheading3')
-            Image3 = form.files.get('Image3')
+            # Image3 = form.files.get('Image3')
             Paragraph3 = form.cleaned_data.get('Paragraph3')
-            video = form.files.get('Video')
+            # video = form.files.get('Video')
             slug = form.cleaned_data.get('slug')
             NewBlog = Blog(
                 Name = Name,
                 Background_Image = Background_Image,
                 Subheading1 = Subheading1,
-                Image1 = Image1,
+                # Image1 = Image1,
                 Paragraph1 = Paragraph1,
                 Subheading2 = Subheading2,
-                Image2 = Image2,
+                # Image2 = Image2,
                 Paragraph2 = Paragraph2,
                 Subheading3 = Subheading3,
-                Image3 = Image3,
+                # Image3 = Image3,
                 Paragraph3 = Paragraph3,
-                Video = video,
+                # Video = video,
                 slug = slug
 
             )
@@ -146,29 +146,29 @@ def EditBlog(request,slug):
             Name = form.cleaned_data.get('Name')
             Background_Image = form.cleaned_data.get('Background_Image')
             Subheading1 = form.cleaned_data.get('Subheading1')
-            Image1 = form.files.get('Image1')
+            # Image1 = form.files.get('Image1')
             Paragraph1 = form.cleaned_data.get('Paragraph1')
             Subheading2 = form.cleaned_data.get('Subheading2')
-            Image2 = form.files.get('Image2')
+            # Image2 = form.files.get('Image2')
             Paragraph2 = form.cleaned_data.get('Paragraph2')
             Subheading3 = form.cleaned_data.get('Subheading3')
-            Image3 = form.files.get('Image3')
+            # Image3 = form.files.get('Image3')
             Paragraph3 = form.cleaned_data.get('Paragraph3')
-            video = form.files.get('Video')
+            # video = form.files.get('Video')
             slug = form.cleaned_data.get('slug')
 
             blog.Name=Name
             blog.Background_Image=Background_Image
             blog.Subheading1=Subheading1
-            blog.Image1=Image1
+            # blog.Image1=Image1
             blog.Paragraph1=Paragraph1
             blog.Subheading2=Subheading2
-            blog.Image2=Image2
+            # blog.Image2=Image2
             blog.Paragraph2=Paragraph2
             blog.Subheading3=Subheading3
-            blog.Image3=Image3
+            # blog.Image3=Image3
             blog.Paragraph3=Paragraph3
-            blog.Video=video
+            # blog.Video=video
             blog.slug=slug
 
 
