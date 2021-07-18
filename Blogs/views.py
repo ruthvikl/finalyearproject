@@ -1,31 +1,79 @@
 from django.shortcuts import render,redirect
 from .models import Blog,Comments,Contacts
 from .forms import NewForm
-
+from django.contrib.auth import login
 from django.contrib.auth.models import User
 import tensorflow as tf
+from Blogs.forms import CustomUserCreationForm
 # import speech_recognition as sr
 import tensorflow_hub as hub
 import tensorflow_text as text
 # Create your views here.
 text_recog = []
-def HomeView(request):
+rate = []
+blog = []
 
-    blogs = Blog.objects.all()[0:2]
+def register(request):
+    if request.method == "GET":
+        return render(
+            request, "register.html",
+            {"form": CustomUserCreationForm}
+        )
+    elif request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return render(
+                request, "register.html",
+                {"form": CustomUserCreationForm})
+
+def HomeView(request):
+    rate.clear()
+    blogs = Blog.objects.all()[0:10]
+    for i in blogs:
+        print(f"Blog Name is {i.Name}, {i.average_rating}")
+        blog.append(i.Name)
+        rate.append(i.average_rating)
+    print(rate)
+    rcp = rate.copy()
+    bcp = blog.copy()
+    index = -1
+    for a in range(1,4):
+        big = max(rcp)
+        print(big)
+        index = rcp.index(big)
+        print(bcp[index])
+        rcp.remove(big)
+        bcp.remove(bcp[index])
+        print(rcp)
+    print(blog)
+    # rate.sort()
+    # print(rate[-3:])
+        # blog_len = len(i.coments.all())
+        # for j in i.coments.all():
+        #     print("actual rating", j.rating)
+        #     avg_rating += float(j.rating)
+        #     print(avg_rating)
+        #     print(f"Average is : {avg_rating}")
+        # print(f"Toal Average is : {avg_rating}") 
+        # if blog_len is not 0:
+        #     avg_rating = avg_rating/blog_len
+        #     print(f"Average Rating is : {avg_rating}")
+        # avg_rating = 0.0
     return render(request,'index.html',{
         'blogs':blogs
     })
 
-def register(request):
-    if request.method == "GET":
-        return render(request,'register.html',{})  
-    else:
-        username = request.POST['name']
-        password = request.POST['password']
-        email = request.POST['email']
-        user = User.objects.create_superuser(username, password, email)
-        user.save()
-        return redirect("Blogs:HomeView")
+# def register(request):
+#     if request.method == "GET":
+#         return render(request,'register.html',{})  
+#     else:
+#         username = request.POST['name']
+#         password = request.POST['password']
+#         email = request.POST['email']
+#         user = User.objects.create_superuser(username, password, email)
+#         user.save()
+#         return redirect("Blogs:HomeView")
 
 
 def ContactView(request):
@@ -71,6 +119,9 @@ def BlogView(request,slug):
             rating = prediction
         )
         com.save()
+        rating_count = len(blog.coments.all())
+        blog.average_rating = (blog.average_rating*rating_count + float(prediction))/(rating_count+1)
+        print(f"Average Rating issss : {blog.average_rating}")
         blog.coments.add(com)
         blog.save()
         text_recog.clear()

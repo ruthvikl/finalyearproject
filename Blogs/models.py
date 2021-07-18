@@ -24,13 +24,11 @@ class Blog(models.Model):
     # Video = models.FileField(blank=True,null=True,upload_to="Videos")
 
     slug = models.SlugField(blank=True,null=True,unique=True)
-
+    average_rating = models.FloatField(default=0) 
     coments = models.ManyToManyField("Comments",blank=True)
     def get_abs_url(self):
         return reverse(viewname="Blogs:BlogView",
-                       kwargs={'slug':self.slug}
-
-                       )
+                       kwargs={'slug':self.slug})
 
 class Comments(models.Model):
     Name = models.CharField(blank=True,null=True,max_length=50)

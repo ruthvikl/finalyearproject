@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
-# from django.conf.urls import url
+from django.conf.urls import url
 
 
 from django.urls import path
@@ -18,7 +18,7 @@ urlpatterns = [
     path('Contact/',ContactView,name='ContactView'),
     path('AddBlog/',AddBlog,name='AddBlog'),
     path('EditBlog/<slug>',EditBlog,name='EditBlog'),
-    path('Register/', register,name='Register')
+    url(r'^Register/', register,name='Register')
     # url(r'^prediction/$', prediction, name='prediction'),
 ]
 

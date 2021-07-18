@@ -6,11 +6,7 @@
              <h1>Register</h1>
             <form method="post">
                 {% csrf_token %}
-                input your name: <input type="text" name="name" >
-                <br>
-                input your email: <input type="text" name="email" >
-                <br>
-                input your password: <input type="password" name="password" >
+                {{form}}
                 <button class="btn btn-primary">Register</button>
             </form>
             </div>
