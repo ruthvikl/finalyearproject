@@ -43,7 +43,7 @@
                <div class="col-lg-3 logo_section">
                   <div class="full">
                      <div class="center-desk">
-                        <div class="logo"> <a href="index.html"><img src="{% static 'images/Logo.png' %}" alt="#"></a> </div>
+                        <div class="head"><a href="{% url 'Blogs:HomeView' %}"><h1 style="font-size: 8vmin;">BAD BOYS</h1></a> </div>
                      </div>
                   </div>
                </div>
@@ -66,12 +66,12 @@
                               <li>
                                  <a href="{% url 'logout' %}">Logout</a>
                               </li>
+                              <li>
+                               <a href="{% url 'Blogs:Analytics' %}">Analytics</a>
+                              </li>
                               {% else %}
                               <li>
                                  <a href="{% url 'login' %}">Login</a>
-                              </li>
-                              <li>
-                               <a href="{% url 'Blogs:Analytics' %}">Analytics</a>
                               </li>
                               {% endif %}
 
@@ -95,29 +95,18 @@
                      <!-- The slideshow -->
                      <div class="carousel-inner">
                         <div class="carousel-item active">
-                           <img src="{% static 'images/slider_1.png' %}" alt="#" />
-                        </div>
-                        <div class="carousel-item">
-                           <img src="{% static 'images/slider_1.png' %}" alt="#" />
+                           <img src="{% static 'images/marketing_img.png' %}" alt="#" />
                         </div>
                      </div>
-                     <!-- Left and right controls -->
-                     <a class="carousel-control-prev" href="#slider_main" data-slide="prev">
-                     <i class="fa fa-angle-left" aria-hidden="true"></i>
-                     </a>
-                     <a class="carousel-control-next" href="#slider_main" data-slide="next">
-                     <i class="fa fa-angle-right" aria-hidden="true"></i>
-                     </a>
                   </div>
                </div>
                <div class="col-md-5">
                   <div class="full slider_cont_section">
-                     <h4>More Featured in</h4>
-                     <h3>Jack Blogger</h3>
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look</p>
+                     <h3>AI Based Sentiment Analysis & Conversation Management System</h3>
+                     <p>Reviews are the integral part that helps an organization improve a certain product.Sentences in reviews are taken and analyzed for the full context and then, the ML Model predicts the sentiment of the review. This is Sentiment Analysis. 
+                        <br>In this project, we have built a Machine Learning Model to analyze a text, either extracted from audio or just as plain text and determine whether it is positive or negative with its rating.</p>
                      <div class="button_section">
-                        <a href="about.html">Read More</a>
-                        <a href="contact.html">Contact Us</a>
+                        <a href="{% url 'Blogs:AboutView' %}">Read More</a>
                      </div>
                   </div>
                </div>
@@ -136,24 +125,29 @@
                </div>
             </div>
             {% for blg in blogs %}
-            <a href="{{blg.get_abs_url}}">
-            <div class="row pt-2">
-               <div class="col-md-6">
-                  <img src="{{blg.Background_Image.url}}" alt="#" height="300" width="700"/>
-               </div>
-               <div class="col-md-6">
-                  <div class="full blog_cont">
-                     <h4>{{blg.Name}}</h4>
-                     <p>{{blg.Paragraph1}}</p>
-                  </div>
-               </div>
-            </div>
-               </a>
+               {% for t in top %}
+                  {% if t == blg.Name %}
+                     <a href="{{blg.get_abs_url}}">
+                        <div class="row pt-2">
+                           <div class="col-md-6 margin_top_30">
+                              <img src="{{blg.Background_Image.url}}" alt="#" height="300" width="700"/>
+                           </div>
+                           <div class="col-md-6">
+                              <div class="full blog_cont">
+                                 <h4>{{blg.Name}}</h4>
+                                    <p>Rating : <strong>{{blg.average_rating}}/10</p>
+                                 <p>{{blg.Paragraph1}}</p>
+                              </div>
+                           </div>
+                        </div>
+                     </a>
+                  {% endif %}
+               {% endfor %}
             {% endfor %}
             <div class="row margin_top_30">
                <div class="col-md-12">
                   <div class="button_section full center margin_top_30">
-                     <a style="margin:0;" href="about.html">Read More</a>
+                     <a style="margin:0;" href="{% url 'Blogs:AboutView' %}">Read More</a>
                   </div>
                </div>
             </div>
@@ -162,83 +156,12 @@
       <!-- end section -->
 
       {% endblock %}
-      <!-- footer -->
-      <footer>
-         <div class="container">
-            <div class="row">
-               <div class="col-lg-4 col-md-6">
-                  <a href="#"><img src="{% static 'images/Logo.png' %}" alt="#" /></a>
-                  <ul class="contact_information">
-                     <li><span><img src="{% static 'images/location_icon.png' %}" alt="#" /></span><span class="text_cont">London 145<br>United Kingdom</span></li>
-                     <li><span><img src="{% static 'images/phone_icon.png' %}" alt="#" /></span><span class="text_cont">987 654 3210<br>987 654 3210</span></li>
-                     <li><span><img src="{% static 'images/mail_icon.png' %}" alt="#" /></span><span class="text_cont">demo@gmail.com<br>support@gmail.com</span></li>
-                  </ul>
-                  <ul class="social_icon">
-                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                     <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                     <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                     <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                  </ul>
-               </div>
-               <div class="col-lg-2 col-md-6">
-                  <div class="footer_links">
-                     <h3>Quick link</h3>
-                     <ul>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Home</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Features</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Evens</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Markrting</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Blog</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Testimonial</a></li>
-                        <li><a href="#"><i class="fa fa-angle-right" aria-hidden="true"></i> Contact</a></li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6">
-                  <div class="footer_links">
-                     <h3>Instagram</h3>
-                     <ol>
-                        <li><img class="img-responsive" src="{% static 'images/footer_blog.png' %}" alt="#" /></li>
-                        <li><img class="img-responsive" src="{% static 'images/footer_blog.png' %}" alt="#" /></li>
-                        <li><img class="img-responsive" src="{% static 'images/footer_blog.png' %}" alt="#" /></li>
-                        <li><img class="img-responsive" src="{% static 'images/footer_blog.png' %}" alt="#" /></li>
-                     </ol>
-                  </div>
-               </div>
-               <div class="col-lg-3 col-md-6">
-                  <div class="footer_links">
-                     <h3>Contact us</h3>
-                     <form action="index.html">
-                        <fieldset>
-                           <div class="field">
-                              <input type="text" name="name" placeholder="Your Name" required="" />
-                           </div>
-                           <div class="field">
-                              <input type="email" name="email" placeholder="Email" required="" />
-                           </div>
-                           <div class="field">
-                              <input type="text" name="subject" placeholder="Subject" required="" />
-                           </div>
-                           <div class="field">
-                              <textarea placeholder="Message"></textarea>
-                           </div>
-                           <div class="field">
-                              <div class="center">
-                                 <button class="reply_bt">Send</button>
-                              </div>
-                           </div>
-                        </fieldset>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </footer>
+
       <div class="cpy">
          <div class="container">
             <div class="row">
                <div class="col-md-12">
-                  <p>Copyright © 2019 Design by <a href="https://html.design/">Free Html Templates</a></p>
+                  <p>Copyright © 2019 Design by Bad Boys</p>
                </div>
             </div>
          </div>

@@ -125,9 +125,6 @@
                               <p>{{coms.rating}}/10</p>
                            </div>
                         </div>
-                        <div class="col-md-2">
-                           <a class="reply_bt" href="#">Reply</a>
-                        </div>
                      </div>
                   </div>
                   {% endfor %}
@@ -148,11 +145,14 @@
                         <fieldset>
                            <div class="col-md-12">
                               <div class="row">
-                                 <div class="col-md-6">
+                                 <div class="col-md-5">
                                     <input type="text" name="name" value="Anon" placeholder="Name" required="#" />
                                  </div>
-                                 <div class="col-md-6">
+                                 <div class="col-md-5">
                                     <input id="note-textarea" type="text" name="comment" placeholder="Comment">
+                                 </div>
+                                 <div class="col-md-2">
+                                    <a id="start-record-btn" title="Start Recording"><img style="width:15%; margin-top:10%" src="{% static 'images/mike.png' %}"></a>
                                  </div>
                               </div>
                               <div class="row margin_top_30">
@@ -165,7 +165,6 @@
                            </div>
                         </fieldset>
                      </form>
-                     <button id="start-record-btn" title="Start Recording">Start Recognition</button>
                      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>     
     <script>
        try {

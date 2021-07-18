@@ -29,6 +29,7 @@ def register(request):
 
 def HomeView(request):
     rate.clear()
+    top = []
     blogs = Blog.objects.all()[0:10]
     for i in blogs:
         print(f"Blog Name is {i.Name}, {i.average_rating}")
@@ -41,8 +42,10 @@ def HomeView(request):
     for a in range(1,4):
         big = max(rcp)
         print(big)
+        
         index = rcp.index(big)
         print(bcp[index])
+        top.append(bcp[index])
         rcp.remove(big)
         bcp.remove(bcp[index])
         print(rcp)
@@ -61,7 +64,8 @@ def HomeView(request):
         #     print(f"Average Rating is : {avg_rating}")
         # avg_rating = 0.0
     return render(request,'index.html',{
-        'blogs':blogs
+        'blogs':blogs,
+        'top' : top
     })
 
 # def register(request):
