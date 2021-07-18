@@ -35,6 +35,7 @@ class Blog(models.Model):
 class Comments(models.Model):
     Name = models.CharField(blank=True,null=True,max_length=50)
     Comment = models.TextField()
+    rating = models.TextField(blank=True,null=True)
     Date = models.DateTimeField(auto_now_add=True,blank=True,null=True)
 
 class Contacts(models.Model):

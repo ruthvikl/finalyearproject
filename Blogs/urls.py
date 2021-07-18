@@ -1,9 +1,12 @@
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+# from django.conf.urls import url
+
 
 from django.urls import path
-from Blogs.views import HomeView,BlogView,AboutView,ContactView,AddBlog,EditBlog
+from Blogs.views import HomeView,BlogView,AboutView,ContactView,AddBlog,EditBlog,register
+# ,prediction
 
 app_name ="Blogs"
 
@@ -15,6 +18,8 @@ urlpatterns = [
     path('Contact/',ContactView,name='ContactView'),
     path('AddBlog/',AddBlog,name='AddBlog'),
     path('EditBlog/<slug>',EditBlog,name='EditBlog'),
+    path('Register/', register,name='Register')
+    # url(r'^prediction/$', prediction, name='prediction'),
 ]
 
 if settings.DEBUG:

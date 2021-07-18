@@ -1,14 +1,31 @@
 from django.shortcuts import render,redirect
 from .models import Blog,Comments,Contacts
 from .forms import NewForm
+
+from django.contrib.auth.models import User
+import tensorflow as tf
+# import speech_recognition as sr
+import tensorflow_hub as hub
+import tensorflow_text as text
 # Create your views here.
+text_recog = []
 def HomeView(request):
 
     blogs = Blog.objects.all()[0:2]
     return render(request,'index.html',{
-
         'blogs':blogs
     })
+
+def register(request):
+    if request.method == "GET":
+        return render(request,'register.html',{})  
+    else:
+        username = request.POST['name']
+        password = request.POST['password']
+        email = request.POST['email']
+        user = User.objects.create_superuser(username, password, email)
+        user.save()
+        return redirect("Blogs:HomeView")
 
 
 def ContactView(request):
@@ -41,18 +58,27 @@ def BlogView(request,slug):
         blog = Blog.objects.filter(slug=slug)[0]
         comment = request.POST['comment']
         name = request.POST['name']
+        result = comment
+        print(result)
+        model = tf.keras.models.load_model('model_py/new_IMDb_bert', compile=False)
+        text_recog.append(result)
+        print(text_recog)
+        prediction = tf.sigmoid(model(tf.constant(text_recog)))
+        prediction = f'{prediction[0][0]*10:.3f}'
         com = Comments(
             Comment = comment,
-            Name = name
+            Name = name,
+            rating = prediction
         )
         com.save()
         blog.coments.add(com)
         blog.save()
+        text_recog.clear()
+        print(text_recog)
+        print(prediction)
         return render(request, 'blog.html', {
             'blog': blog
-        })
-
-
+        }) 
 
 def AboutView(request):
     blogs = Blog.objects.all()
